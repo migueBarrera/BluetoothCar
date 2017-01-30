@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_gamepad"
+        android:title="GamePad"
+        android:icon="@drawable/ic_gamepad_black_24dp"
+        />
+
+    <item
+        android:id="@+id/menu_giroscopio"
+        android:title="Giroscopio"
+        android:icon="@drawable/ic_gyro"
+        />
+
+</menu>

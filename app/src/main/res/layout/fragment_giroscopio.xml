@@ -1,0 +1,118 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="es.iesnervion.bluetoohcar.GiroscopioFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/arribaGiroscopio"
+                android:layout_centerInParent="true"
+                android:layout_width="100sp"
+                android:layout_height="85sp"
+                android:src="@drawable/arriba_icon"
+                android:scaleType="fitXY"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/izqGiroscopio"
+                android:layout_alignParentLeft="true"
+                android:layout_width="100sp"
+                android:layout_height="85sp"
+                android:src="@drawable/izq_icon"
+                android:scaleType="fitXY"/>
+            <ImageView
+                android:id="@+id/derGiroscopio"
+                android:layout_alignParentRight="true"
+                android:layout_width="100sp"
+                android:layout_height="85sp"
+                android:src="@drawable/der_icon"
+                android:scaleType="fitXY"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/abajoGiroscopio"
+                android:layout_centerInParent="true"
+                android:layout_width="100sp"
+                android:layout_height="85sp"
+                android:src="@drawable/abajo_icon"
+                android:scaleType="fitXY"/>
+        </RelativeLayout>
+
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="87dp"
+            android:id="@+id/tvx" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvx"
+            android:layout_alignStart="@+id/tvx"
+            android:layout_marginTop="48dp"
+            android:id="@+id/tvy" />
+
+        <TextView
+            android:text="EjeY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvy"
+            android:layout_toStartOf="@+id/tvy"
+            android:layout_marginEnd="22dp"
+            android:id="@+id/textView3" />
+
+        <TextView
+            android:text="EjeX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvx"
+            android:layout_alignStart="@+id/textView3"
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:text="EjeZ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_toStartOf="@+id/tvx"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="26dp"
+            android:id="@+id/textView7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView7"
+            android:layout_toEndOf="@+id/tvx"
+            android:id="@+id/tvZ" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvy"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_marginTop="22dp"
+            android:id="@+id/resultado" /> -->
+    </LinearLayout>
+
+</FrameLayout>
