@@ -99,7 +99,7 @@ public class GamePadFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
 
                         if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-                            mListener.up();
+                            mListener.upplus();
                         } else if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
                             mListener.stopUpDown();
                         }

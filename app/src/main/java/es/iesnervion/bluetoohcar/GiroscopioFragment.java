@@ -30,7 +30,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
     boolean andar = false ,andarPlus = false, giroDr = false , giroIzq = false;
     SensorManager mgr;
     Sensor sensor;
-    //TextView tvX , tvY ,tvZ ,res;
     ImageView arribaImage , abajoImage, derImage , izImage;
     float ejeZ = 0  , ejeY = 0 , ejeX = 0;
     private OnFragmentInteractionListener mListener;
@@ -58,10 +57,7 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
 
          startAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.blink_normal_giroscopio);
         startAnimationPlus = AnimationUtils.loadAnimation(getContext(), R.anim.blink_plus);
-        //tvX = (TextView) v.findViewById(R.id.tvx);
-        //tvY = (TextView) v.findViewById(R.id.tvy);
-        //tvZ = (TextView) v.findViewById(R.id.tvZ);
-        //res = (TextView) v.findViewById(R.id.resultado);
+
 
         mgr=(SensorManager) v.getContext().getSystemService(Context.SENSOR_SERVICE);
         sensor = mgr.getDefaultSensor(SensorManager.SENSOR_DELAY_GAME);
@@ -105,29 +101,24 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         ejeY = event.values[1];
         ejeZ = event.values[2];
 
-        //tvX.setText(String.valueOf(ejeX));
-        //tvY.setText(String.valueOf(ejeY));
-        //tvZ.setText(String.valueOf(ejeZ));
 
         //Andar
-        if((ejeZ > 7.5 && andar==false && andarPlus==false)|| (ejeZ < 9 && andarPlus==true)){
+        if((ejeZ > 6 && andar==false && andarPlus==false)|| (ejeZ < 8 && andarPlus==true)){
 
             DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
             arribaImage.startAnimation(startAnimation);
             mListener.up();
-            //res.setText("ANDAR");
             andar = true;
             andarPlus = false;
         }
 
         //AndarPlus
-        if(ejeZ > 9.5 && andarPlus==false){
+        if(ejeZ > 8.5 && andarPlus==false){
             DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
             arribaImage.startAnimation(startAnimationPlus);
             mListener.upplus();
-            //res.setText("ANDAR");
             andarPlus = true;
         }
 
@@ -137,7 +128,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
 
             abajoImage.startAnimation(startAnimation);
             mListener.down();
-            //res.setText("ANDAR");
             andar = true;
         }
 
@@ -149,7 +139,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
             abajoImage.clearAnimation();
             mListener.stopUpDown();
             mListener.up();
-            //res.setText("PARAR");
             andar = false;
         }
 
@@ -159,7 +148,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
             derImage.startAnimation(startAnimation);
             mListener.rigth();
             mListener.up();
-            //res.setText("GIRO DERECHA");
             giroDr = true;
         }
 
@@ -169,7 +157,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
             izImage.startAnimation(startAnimation);
             mListener.left();
             mListener.up();
-            //res.setText("GIRO IZQUIERDA");
             giroIzq = true;
         }
 
@@ -183,7 +170,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
                 derImage.clearAnimation();
                 mListener.stopRigtLeft();
                 mListener.up();
-                //res.setText("DESACTIVAR GIRO");
                 giroDr = false;
                 giroIzq = false;
             }
