@@ -27,7 +27,7 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass.
  */
 public class GiroscopioFragment extends Fragment implements SensorEventListener {
-    boolean andar = false , giroDr = false , giroIzq = false;
+    boolean andar = false ,andarPlus = false, giroDr = false , giroIzq = false;
     SensorManager mgr;
     Sensor sensor;
     //TextView tvX , tvY ,tvZ ,res;
@@ -110,7 +110,7 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         //tvZ.setText(String.valueOf(ejeZ));
 
         //Andar
-        if(ejeZ > 7.5 && andar==false){
+        if((ejeZ > 7.5 && andar==false && andarPlus==false)|| (ejeZ < 9 && andarPlus==true)){
 
             DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
@@ -118,16 +118,17 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
             mListener.up();
             //res.setText("ANDAR");
             andar = true;
+            andarPlus = false;
         }
 
         //AndarPlus
-        if(ejeZ > 9.5){
+        if(ejeZ > 9.5 && andarPlus==false){
             DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
             arribaImage.startAnimation(startAnimationPlus);
             mListener.upplus();
             //res.setText("ANDAR");
-            andar = true;
+            andarPlus = true;
         }
 
         //Atras
