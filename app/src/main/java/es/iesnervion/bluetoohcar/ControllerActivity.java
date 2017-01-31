@@ -6,11 +6,15 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -29,6 +33,8 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
     BluetoothAdapter myBluetooth = null;
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
+    Drawable arribaIcon , abajoIcon , derIcon , izqIcon;
+
 
     //Strings que se envian por bluetooth
     String start = "1" , startPlus = "13", stop = "2",marchaAtras = "3",giroIzq = "5",
@@ -43,6 +49,12 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         //Intent para recoger la direccion MAC
         Intent newint = getIntent();
         address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS); //receive the address of the bluetooth device
+
+        //Drawables icon
+        arribaIcon  = ContextCompat.getDrawable(getApplicationContext(), R.drawable.arriba_icon);
+        abajoIcon  = ContextCompat.getDrawable(getApplicationContext(), R.drawable.abajo_icon);
+        derIcon  = ContextCompat.getDrawable(getApplicationContext(), R.drawable.der_icon);
+        izqIcon = ContextCompat.getDrawable(getApplicationContext(), R.drawable.izq_icon);
 
         //Botones de navegacion
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
@@ -101,13 +113,17 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
-                    btSocket.getOutputStream().write(start.toString().getBytes());
+
+                //Enviar infor por bluetooth
+                btSocket.getOutputStream().write(start.toString().getBytes());
             }
             catch (IOException e)
             {
                 msg("Error enviando datos");
             }
         }
+        //Cabiar color
+        changeColorIcon(arribaIcon,R.color.colorAccent);
     }
 
     @Override
@@ -115,6 +131,9 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
+                //Cabiar color
+                changeColorIcon(arribaIcon,R.color.colorAccentDark);
+                //Enviar infor por bluetooth
                 btSocket.getOutputStream().write(startPlus.toString().getBytes());
             }
             catch (IOException e)
@@ -129,6 +148,9 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
+                //Cabiar color
+                changeColorIcon(abajoIcon,R.color.colorAccent);
+                //Enviar infor por bluetooth
                 btSocket.getOutputStream().write(marchaAtras.toString().getBytes());
             }
             catch (IOException e)
@@ -143,6 +165,9 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
+                //Cabiar color
+                changeColorIcon(derIcon,R.color.colorAccent);
+                //Enviar infor por bluetooth
                 btSocket.getOutputStream().write(giroDr.toString().getBytes());
             }
             catch (IOException e)
@@ -157,6 +182,9 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
+                //Cabiar color
+                changeColorIcon(izqIcon,R.color.colorAccent);
+                //Enviar infor por bluetooth
                 btSocket.getOutputStream().write(giroIzq.toString().getBytes());
             }
             catch (IOException e)
@@ -171,6 +199,8 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
+
+                //Enviar infor por bluetooth
                 btSocket.getOutputStream().write(stop.toString().getBytes());
             }
             catch (IOException e)
@@ -178,6 +208,9 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
                 msg("Error enviando datos");
             }
         }
+        //Cabiar color
+        changeColorIcon(arribaIcon,R.color.black);
+        changeColorIcon(abajoIcon,R.color.black);
     }
 
     @Override
@@ -185,6 +218,10 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         if (btSocket!=null)
         {
             try{
+                //Cabiar color
+                changeColorIcon(izqIcon,R.color.black);
+                changeColorIcon(derIcon,R.color.black);
+                //Enviar infor por bluetooth
                 btSocket.getOutputStream().write(giroStop.toString().getBytes());
             }
             catch (IOException e)
@@ -294,6 +331,14 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         finish(); //return to the first layout
     }
 
+    public void changeColorIcon(Drawable drawable, int color){
+        //DrawableCompat.setTint(drawable, color);
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(getApplicationContext(), color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //drawable.setTint(color);
+        }
+    }
+
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     {
         private boolean ConnectSuccess = true; //if it's here, it's almost connected
@@ -346,4 +391,6 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
     public void msg(String cadena){
         Toast.makeText(this,cadena,Toast.LENGTH_LONG).show();
     }
+
+
 }

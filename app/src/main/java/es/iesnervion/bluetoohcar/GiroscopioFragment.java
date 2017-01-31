@@ -3,6 +3,7 @@ package es.iesnervion.bluetoohcar;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -35,6 +36,7 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
     private OnFragmentInteractionListener mListener;
     Animation startAnimation , startAnimationPlus;
 
+
     public GiroscopioFragment() {
         // Required empty public constructor
     }
@@ -54,6 +56,8 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         abajoImage = (ImageView) v.findViewById(R.id.abajoGiroscopio);
         derImage = (ImageView) v.findViewById(R.id.derGiroscopio);
         izImage = (ImageView) v.findViewById(R.id.izqGiroscopio);
+
+
 
          startAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.blink_normal_giroscopio);
         startAnimationPlus = AnimationUtils.loadAnimation(getContext(), R.anim.blink_plus);
@@ -105,7 +109,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         //Andar
         if((ejeZ > 6 && andar==false && andarPlus==false)|| (ejeZ < 8 && andarPlus==true)){
 
-            DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
             arribaImage.startAnimation(startAnimation);
             mListener.up();
@@ -115,7 +118,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
 
         //AndarPlus
         if(ejeZ > 8.5 && andarPlus==false){
-            DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
             arribaImage.startAnimation(startAnimationPlus);
             mListener.upplus();
@@ -124,7 +126,6 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
 
         //Atras
         if(ejeZ < -2 && andar==false){
-            DrawableCompat.setTint(abajoImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
 
             abajoImage.startAnimation(startAnimation);
             mListener.down();
@@ -133,8 +134,7 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
 
         //Parar
         if(ejeZ < 4 && ejeZ > 2 && andar==true){
-            DrawableCompat.setTint(arribaImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.black));
-            DrawableCompat.setTint(abajoImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.black));
+
             arribaImage.clearAnimation();
             abajoImage.clearAnimation();
             mListener.stopUpDown();
@@ -143,8 +143,8 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         }
 
         //Giro Derecha
-        if(ejeY > 5 && giroDr==false){
-            DrawableCompat.setTint(derImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
+        if(ejeY > 4 && giroDr==false){
+
             derImage.startAnimation(startAnimation);
             mListener.rigth();
             mListener.up();
@@ -152,8 +152,8 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         }
 
         //Giro Izquierda
-        if(ejeY < -5 && giroIzq==false){
-            DrawableCompat.setTint(izImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
+        if(ejeY < -4 && giroIzq==false){
+
             izImage.startAnimation(startAnimation);
             mListener.left();
             mListener.up();
@@ -163,9 +163,8 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
         //Desactivar GIRO
         if(giroIzq == true || giroDr == true){
 
-            if(ejeY < 1 && ejeY > -1){
-                DrawableCompat.setTint(derImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.black));
-                DrawableCompat.setTint(izImage.getDrawable(), ContextCompat.getColor(getContext(), R.color.black));
+            if(ejeY < 1.5 && ejeY > -1.5){
+
                 izImage.clearAnimation();
                 derImage.clearAnimation();
                 mListener.stopRigtLeft();
@@ -179,5 +178,10 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public void changeColorIcon(Drawable drawable, int color){
+       // DrawableCompat.setTint(drawable, color);
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(getContext(), color));
     }
 }
