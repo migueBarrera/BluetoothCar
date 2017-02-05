@@ -4,17 +4,23 @@ package es.iesnervion.bluetoohcar;
 import android.app.Activity;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import java.io.IOException;
 
@@ -25,10 +31,10 @@ import java.io.IOException;
 public class GamePadFragment extends Fragment {
 
     //Buttons
-    ImageView btnUP , btnDown , btnRight , btnLeft,btnSpeaker,btnligth, powerButton;
+    ImageView btnUP , btnDown , btnRight , btnLeft,btnSpeaker,btnligth,btnligthPlus, powerButton;
     ImageView btnInterIzq,btnInterDr;
     private OnFragmentInteractionListener mListener;
-
+    Drawable ligth_icon , ligthPlus_icon;
 
 
     public GamePadFragment(){
@@ -82,6 +88,10 @@ public class GamePadFragment extends Fragment {
         btnInterDr = (ImageView) v.findViewById(R.id.intermitentederButton);
         btnInterIzq = (ImageView) v.findViewById(R.id.intermitenteizqButton);
         powerButton = (ImageView) v.findViewById(R.id.powerButton);
+        btnligth = (ImageView) v.findViewById(R.id.luz_cortas);
+        btnligthPlus = (ImageView) v.findViewById(R.id.luz_largas);
+        ligth_icon = ContextCompat.getDrawable(getContext(), R.drawable.ligth_icon);
+        ligthPlus_icon = ContextCompat.getDrawable(getContext(), R.drawable.ligth_icon_plus);
       //  i = (ImageView) v.findViewById(R.id.imageView);
         //i.setOnTouchListener();
         //Enviar Listenner
@@ -166,20 +176,23 @@ public class GamePadFragment extends Fragment {
                 return true;
             }
         });
-        /*//Button ligth
-        btnligth.setOnTouchListener(new View.OnTouchListener() {
+        btnligth.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-                    mListener.ligthStar();
-                } else if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
-                    mListener.ligthStop();
-                }
-
-                return true;
+            public void onClick(View v) {
+                mListener.ligthStar();
+                changeColorIcon(ligth_icon,R.color.colorAccentDark);
+                changeColorIcon(ligthPlus_icon,R.color.colorAccentLigth);
             }
-        });*/
+        });
+
+        btnligthPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.ligthStarPlus();
+                changeColorIcon(ligthPlus_icon,R.color.colorAccentDark);
+                changeColorIcon(ligth_icon,R.color.colorAccentLigth);
+            }
+        });
 
         btnInterDr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,4 +217,11 @@ public class GamePadFragment extends Fragment {
 
     }
 
+    public void changeColorIcon(Drawable drawable, int color){
+        DrawableCompat.setTint(drawable, color);
+        //DrawableCompat.setTint(drawable, ContextCompat.getColor(getContext(), color));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            drawable.setTint(color);
+        }
+    }
 }

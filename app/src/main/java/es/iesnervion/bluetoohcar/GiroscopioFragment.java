@@ -138,7 +138,7 @@ public class GiroscopioFragment extends Fragment implements SensorEventListener 
             arribaImage.clearAnimation();
             abajoImage.clearAnimation();
             mListener.stopUpDown();
-            mListener.up();
+           // mListener.up();
             andar = false;
         }
 

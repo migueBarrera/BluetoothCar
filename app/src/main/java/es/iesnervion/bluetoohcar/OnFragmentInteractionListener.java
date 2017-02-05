@@ -15,6 +15,7 @@ public interface OnFragmentInteractionListener {
     void speakerStart();
     void speakerStop();
     void ligthStar();
+    void ligthStarPlus();
     void ligthStop();
     void intermIzq();
     void intermDr();

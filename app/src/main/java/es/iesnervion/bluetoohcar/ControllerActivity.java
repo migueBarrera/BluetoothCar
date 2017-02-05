@@ -37,9 +37,9 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
 
 
     //Strings que se envian por bluetooth
-    String start = "1" , startPlus = "13", stop = "2",marchaAtras = "3",giroIzq = "5",
-            giroDr = "4",giroStop = "6", bocinaStar = "7",bocinaStop = "8",
-            luzStart = "9" , luzStop = "10",intermitenteIzq = "11",intermitenteDr = "12";
+    String start = "w" , startPlus = "p", stop = "s",marchaAtras = "x",giroIzq = "a",
+            giroDr = "d",giroStop = "k", bocinaStar = "1",bocinaStop = "2",
+            luzStart = "3" ,luzStartPlus = "7", luzStop = "4",intermitenteIzq = "5",intermitenteDr = "6";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         }
 
         selectFragment(selectedItem);
-       //new ConnectBT().execute();
+       new ConnectBT().execute();
     }
 
     private void selectFragment(MenuItem item) {
@@ -134,7 +134,8 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
                 //Cabiar color
                 changeColorIcon(arribaIcon,R.color.colorAccentDark);
                 //Enviar infor por bluetooth
-                btSocket.getOutputStream().write(startPlus.toString().getBytes());
+
+                btSocket.getOutputStream().write(startPlus.getBytes());
             }
             catch (IOException e)
             {
@@ -265,6 +266,20 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         {
             try{
                 btSocket.getOutputStream().write(luzStart.toString().getBytes());
+            }
+            catch (IOException e)
+            {
+                msg("Error enviando datos");
+            }
+        }
+    }
+
+    @Override
+    public void ligthStarPlus() {
+        if (btSocket!=null)
+        {
+            try{
+                btSocket.getOutputStream().write(luzStartPlus.toString().getBytes());
             }
             catch (IOException e)
             {
