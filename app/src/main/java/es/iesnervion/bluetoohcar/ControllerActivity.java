@@ -75,7 +75,7 @@ public class ControllerActivity extends AppCompatActivity implements OnFragmentI
         }
 
         selectFragment(selectedItem);
-       new ConnectBT().execute();
+        new ConnectBT().execute();
     }
 
     private void selectFragment(MenuItem item) {

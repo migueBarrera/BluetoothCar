@@ -1,7 +1,9 @@
 package es.iesnervion.bluetoohcar;
 
+import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.jar.Manifest;
 
 public class SplashActivity extends AppCompatActivity {
     final int REQUEST_ENABLE_BT = 1;
@@ -27,6 +30,10 @@ public class SplashActivity extends AppCompatActivity {
         fraseMotivadora = getFrase();
         textView.setText(fraseMotivadora);
 
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkPermision();
+        }
 
         Thread hilo = new Thread(){
              @Override
@@ -98,6 +105,15 @@ public class SplashActivity extends AppCompatActivity {
 
         frases = arrayFrases.toArray(new String[0]);
         return frases;
+    }
+
+    @TargetApi(23)
+    public void checkPermision(){
+        int permiso = this.checkSelfPermission("manifest.permission.ACCESS_FINE_LOCATION");
+        permiso += this.checkSelfPermission("manifest.permission.ACCESS_COARSE_LOCATION");
+        if(permiso !=0){
+            this.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},666);
+        }
     }
 
 }
