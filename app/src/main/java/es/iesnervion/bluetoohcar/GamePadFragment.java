@@ -28,6 +28,9 @@ import java.io.IOException;
 /**
  * A simple {@link Fragment} subclass.
  */
+/*
+    Esta clase es la del GamePad , tiene los metodos a los que llaman los botones del mismo
+ */
 public class GamePadFragment extends Fragment {
 
     //Buttons
@@ -92,9 +95,7 @@ public class GamePadFragment extends Fragment {
         btnligthPlus = (ImageView) v.findViewById(R.id.luz_largas);
         ligth_icon = ContextCompat.getDrawable(getContext(), R.drawable.ligth_icon);
         ligthPlus_icon = ContextCompat.getDrawable(getContext(), R.drawable.ligth_icon_plus);
-      //  i = (ImageView) v.findViewById(R.id.imageView);
-        //i.setOnTouchListener();
-        //Enviar Listenner
+
         listenner();
 
         return v;

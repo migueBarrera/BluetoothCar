@@ -4,6 +4,10 @@ package es.iesnervion.bluetoohcar;
  * Created by Migue-w10 on 23/01/2017.
  */
 
+/*
+    Esta clase de persistencia representa un dispositivo Bluetooth
+    con su nombre y direcion
+ */
 public class Dispositivo {
     private String Nombre;
     private String Direccion;

@@ -23,6 +23,9 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.UUID;
 
+/*
+    Esta activity controla la coneccion por bluetooth con el dispositivo arduino
+ */
 public class ControllerActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 
     private BottomNavigationView mBottomNav;

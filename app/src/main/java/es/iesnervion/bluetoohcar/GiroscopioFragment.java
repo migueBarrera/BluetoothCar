@@ -27,6 +27,10 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+/*
+    Esta clase es la del Giroscopio , controla las medidas para que se detecte cambio en el giroscopio
+ */
 public class GiroscopioFragment extends Fragment implements SensorEventListener {
     boolean andar = false ,andarPlus = false, giroDr = false , giroIzq = false;
     SensorManager mgr;

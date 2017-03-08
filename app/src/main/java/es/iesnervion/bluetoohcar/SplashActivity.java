@@ -16,6 +16,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.jar.Manifest;
 
+/*
+    Esta activity es la primera que se muestra cuando la app se abre = > comprobara permisos para bluetooth
+        cargara el logo y un mensaje alatorio en pantalla
+ */
 public class SplashActivity extends AppCompatActivity {
     final int REQUEST_ENABLE_BT = 1;
     BluetoothAdapter mBluetoothAdapter;
